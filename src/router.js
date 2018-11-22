@@ -1,15 +1,22 @@
 import React from 'react'
-import { Router, Route, IndexRedirect } from 'dva/router'
+import { Router, Route } from 'dva/router'
 import Layouts from './routes/Layouts'
 import Products from './routes/Products'
 
 export default ({ history }) => {
   return (
     <Router history={history}>
-      <Route path="/" component={Layouts}>
-        <IndexRedirect to="/products" />
-        <Route path="/products" component={Products}/>
-      </Route>
+      <Layouts>
+        <switch>
+          <Route exact path="/" component={Products}>
+          </Route>
+          <Route path="/products" component={Products}>
+          </Route>
+          <Route path="/products/222" component={Products}>
+          </Route>
+          <Route component={null}></Route>
+        </switch>
+      </Layouts>
     </Router>
   )
 }
